@@ -34,6 +34,7 @@ const newConfirmCoffeeOrderFormValidationSchema = zod.object({
   district: zod.string().min(1, 'Informe o bairro'),
   city: zod.string().min(1, 'Informe a cidade'),
   state: zod.string().min(1, 'Informe o estado'),
+  paymentMethods: zod.string(),
 })
 
 export type NewRequestFormData = zod.infer<
@@ -42,6 +43,7 @@ export type NewRequestFormData = zod.infer<
 
 export function Checkout() {
   const { cartItems, cartItemsTotal, cartQuantity, cleanCart } = useCart()
+
   const cartTotal = DELIVERY_PRICE + cartItemsTotal
 
   const formattedItemsTotal = formatMoney(cartItemsTotal)
@@ -60,6 +62,7 @@ export function Checkout() {
       district: '',
       city: '',
       state: '',
+      paymentMethods: '',
     },
   })
 
@@ -151,7 +154,13 @@ export function Checkout() {
 
           <div>
             <PaymentMethodContainer>
-              <input type="radio" id="credit" name="paymentMethods" />
+              <input
+                type="radio"
+                id="credit"
+                /* name="paymentMethods" */
+                value="Cartão de Crédito"
+                {...register('paymentMethods')}
+              />
               <label htmlFor="credit">
                 <CreditCard size={16} />
                 Cartão de crédito
@@ -159,7 +168,13 @@ export function Checkout() {
             </PaymentMethodContainer>
 
             <PaymentMethodContainer>
-              <input type="radio" id="debit" name="paymentMethods" />
+              <input
+                type="radio"
+                id="debit"
+                /* name="paymentMethods" */
+                value="Cartão de Débito"
+                {...register('paymentMethods')}
+              />
               <label htmlFor="debit">
                 <Bank size={16} />
                 Cartão de débito
@@ -167,7 +182,13 @@ export function Checkout() {
             </PaymentMethodContainer>
 
             <PaymentMethodContainer>
-              <input type="radio" id="money" name="paymentMethods" />
+              <input
+                type="radio"
+                id="money"
+                /* name="paymentMethods" */
+                value="Dinheiro"
+                {...register('paymentMethods')}
+              />
               <label htmlFor="money">
                 <Money size={16} />
                 Dinheiro

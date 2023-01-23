@@ -67,7 +67,7 @@ export function ConfirmedOrder() {
             <span>
               Pagamento na entrega
               <br />
-              <strong>Cartão de Crédito</strong>
+              <strong>{state.paymentMethods}</strong>
             </span>
           </div>
         </Container>
